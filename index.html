@@ -1,0 +1,316 @@
+<html>
+<head>
+    <style>
+        body {
+            background: linear-gradient(to bottom, pink, white);
+            font-family: 'Marina', sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            z-index: 2; /* Ensure content is above clouds */
+        }
+
+        .header {
+            font-size: 56px; /* Increased size */
+            color: #ff69b4;
+        }
+
+        .subheader {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            color: #ADD8E6; /* Lighter blue color */
+        }
+
+        .poem {
+            font-family: 'Monotype Corsiva', cursive; /* Monotype Corsiva font */
+            font-size: 32px; /* Increased size */
+            color: #9370db;
+            margin: 10px 0; /* Reduced margin */
+        }
+
+        .poem-frame {
+            display: inline-block;
+            padding: 10px;
+            margin: 10px 0; /* Reduced margin */
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* Increased gap between buttons */
+        }
+
+        .button {
+            font-family: 'Peperoni', sans-serif;
+            font-size: 24px;
+            color: white;
+            background-color: #5DADE2; /* Darker blue color */
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .gif-container {
+            margin-top: 20px;
+        }
+
+        .gif-container img {
+            width: 200px;
+            height: auto;
+        }
+
+        .corner-gif {
+            position: absolute;
+            width: 300px; /* 1.5x size */
+            height: auto;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2; /* Ensure GIF is above clouds */
+        }
+
+        .top-right-gif {
+            position: absolute;
+            width: 333px; /* 1.5x smaller than 500px */
+            height: auto;
+            top: 20px;
+            right: 20px;
+            z-index: 2; /* Ensure GIF is above clouds */
+        }
+
+        .cloud {
+            position: absolute;
+            background-color: #FFB6A0; /* Darker shade */
+            opacity: 0.52; /* 52% opacity */
+            border-radius: 50%;
+            filter: blur(20px); /* Blurry effect */
+            z-index: 1; /* Ensure clouds are below everything else */
+        }
+
+        .cloud1 {
+            width: 300px;
+            height: 150px;
+            top: 20px;
+            left: 20px;
+        }
+
+        .cloud2 {
+            width: 400px;
+            height: 200px;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .cloud3 {
+            width: 250px;
+            height: 125px;
+            top: 150px;
+            right: 100px;
+        }
+
+        .cloud4 {
+            width: 350px;
+            height: 175px;
+            bottom: 150px;
+            left: 100px;
+        }
+
+        .cloud5 {
+            width: 200px;
+            height: 100px;
+            top: 300px;
+            left: 200px;
+        }
+
+        .cloud6 {
+            width: 300px;
+            height: 150px;
+            bottom: 300px;
+            right: 200px;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background-color: inherit;
+            border-radius: 50%;
+            filter: blur(20px); /* Blurry effect */
+        }
+
+        .cloud1::before {
+            width: 200px;
+            height: 100px;
+            top: -50px;
+            left: 50px;
+        }
+
+        .cloud1::after {
+            width: 150px;
+            height: 75px;
+            top: 50px;
+            left: -50px;
+        }
+
+        .cloud2::before {
+            width: 200px;
+            height: 100px;
+            top: -50px;
+            left: 100px;
+        }
+
+        .cloud2::after {
+            width: 150px;
+            height: 75px;
+            top: 50px;
+            left: -75px;
+        }
+
+        .cloud3::before {
+            width: 150px;
+            height: 75px;
+            top: -25px;
+            left: 50px;
+        }
+
+        .cloud3::after {
+            width: 100px;
+            height: 50px;
+            top: 25px;
+            left: -25px;
+        }
+
+        .cloud4::before {
+            width: 200px;
+            height: 100px;
+            top: -50px;
+            left: 75px;
+        }
+
+        .cloud4::after {
+            width: 150px;
+            height: 75px;
+            top: 50px;
+            left: -50px;
+        }
+
+        .cloud5::before {
+            width: 100px;
+            height: 50px;
+            top: -25px;
+            left: 25px;
+        }
+
+        .cloud5::after {
+            width: 75px;
+            height: 37.5px;
+            top: 25px;
+            left: -25px;
+        }
+
+        .cloud6::before {
+            width: 150px;
+            height: 75px;
+            top: -25px;
+            left: 50px;
+        }
+
+        .cloud6::after {
+            width: 100px;
+            height: 50px;
+            top: 25px;
+            left: -25px;
+        }
+
+        @media (max-width: 768px) {
+            .corner-gif {
+                width: 150px; /* Smaller size for mobile */
+            }
+
+            .top-right-gif {
+                width: 166px; /* Smaller size for mobile */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .corner-gif {
+                width: 300px; /* Larger size for desktop */
+            }
+
+            .top-right-gif {
+                width: 333px; /* Larger size for desktop */
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Marina&family=Pacifico&family=Peperoni&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="cloud cloud4"></div>
+    <div class="cloud cloud5"></div>
+    <div class="cloud cloud6"></div>
+
+    <div class="container">
+        <div class="header">Happy Birthday Putra &lt;3</div>
+        <div class="subheader">I'm so happy & proud of you</div>
+        <div class="poem-frame">
+            <div class="poem">Hari-hari lebah sengat bibir<br>
+            Bukannya kompres, malah garuk<br>
+            Jangan banyak atau kelamaan mikir<br>
+            Aku, kamu, kita balikan yuk!</div>
+        </div>
+        <div class="buttons">
+            <div class="button" onclick="showGif('yes')">YES</div>
+            <div class="button" onclick="showGif('no')">NO</div>
+        </div>
+        <div class="gif-container" id="gif-container"></div>
+    </div>
+
+    <img src="https://media.giphy.com/media/3eZRwwX91t7xSaNkaE/giphy.gif?cid=ecf05e476u7ro7ayadxamtc5e0oonyo9wx9s5k8iucjr1zth&ep=v1_gifs_search&rid=giphy.gif&ct=s" class="corner-gif" alt="Animated GIF">
+    <img src="https://media.giphy.com/media/3FjuotitkhOffmPamc/giphy.gif?cid=ecf05e47iz4cvv54qxf0mvf3g9fmnr21odqtyw9kiionrztl&ep=v1_gifs_search&rid=giphy.gif&ct=s" class="top-right-gif" alt="Animated GIF">
+
+    <script>
+        function showGif(answer) {
+            const gifContainer = document.getElementById('gif-container');
+            gifContainer.innerHTML = '';
+            let gifUrl = '';
+            let message = '';
+
+            if (answer === 'yes') {
+                gifUrl = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHRuZ2pzcWY5Z2MwcG9yYnN6cmJtOXY1ZHBmMXg5dGxyejl0MGowdiZlcD12MV9naWZzX3NlYXJjaCZjdD1z/DB1RUI4HzJaSYSwamW/giphy.gif';
+                message = "Serius? You're not kidding? Call me if you're not kidding!";
+            } else {
+                gifUrl = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMm51Zm91Y3dzem9maGd5NTdvMWEzbGZ5a3hienBxbGdrb3UzZGN6YiZlcD12MV9naWZzX3NlYXJjaCZjdD1z/W4RizlO6qZWQRYw9mb/giphy.gif';
+                message = "It's okay, you're still my favorite person.";
+            }
+
+            const gif = document.createElement('img');
+            gif.src = gifUrl;
+            gif.alt = 'Response GIF';
+            gifContainer.appendChild(gif);
+
+            setTimeout(() => {
+                alert(message);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
